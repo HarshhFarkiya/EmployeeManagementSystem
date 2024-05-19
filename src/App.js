@@ -1,23 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import styles from "./App.module.scss"
+import Login from "./Components/Login/Login";
+import { useNavigate, Routes, Route } from "react-router-dom";
+import { getSessionVariable } from "./Components/Session";
+import Admin from "./Admin/Admin"
+import Employee from "./Employee/Employee";
+import { useEffect } from "react";
+import Manager from "./Manager/Managers";
+const App = () => {
+  const token = getSessionVariable("token");
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.App}>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className={styles.login}>
+              <div className={styles.head}>  Employee Management System</div>
+              <Login />
+            </div>
+          }
+        />
+        <Route
+          path="/admin/*"
+          element={
+            <Admin />
+          }
+        />
+        <Route
+          path="/employee/*"
+          element={
+            <Employee />
+          }
+        />
+        <Route
+          path="/manager/*"
+          element={
+            <Manager />
+          }
+        />
+      </Routes>
     </div>
   );
 }
