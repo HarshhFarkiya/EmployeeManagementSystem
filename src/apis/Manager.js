@@ -86,7 +86,7 @@ export const FetchAllManagers = async () => {
       });
   }
 
-  export const UnassignManager = async (manager_id, project_id) => {
+  export const UnassignManager = async (project_id,manager_id) => {
     const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
     const apiUrl = `${SERVER_BASE_URL}/unassignManager`;
     const token = getSessionVariable("token");

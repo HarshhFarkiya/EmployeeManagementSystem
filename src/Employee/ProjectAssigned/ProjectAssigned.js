@@ -34,7 +34,6 @@ export default function ProjectAssigned({ employee }) {
             }
             else {
                 const data = await response.json();
-                console.log(data)
                 setProjectDetails(data.result[0])
             }
             setFetching(false)
@@ -53,7 +52,6 @@ export default function ProjectAssigned({ employee }) {
             }
             else {
                 const data = await response.json();
-                console.log(data)
                 setManagers(data.result.managers);
                 setEmployees(data.result.employees);
             }
@@ -78,9 +76,9 @@ export default function ProjectAssigned({ employee }) {
             <div>
                 <h3>Assigned Managers :</h3>
                 {
-                    fetching ? <ProgressBar/> : managers && managers.length >0 ? managers.map((manager)=>{
+                    fetching ? <ProgressBar/> : managers && managers.length >0 ? managers.map((manager,index)=>{
                         return(
-                           <div className={styles.user}>
+                           <div className={styles.user} key={index}>
                             <p>{manager.manager_id}</p>
                             <p>{manager.manager_name}</p>
                             <p>{manager.manager_phone}</p>
@@ -93,9 +91,9 @@ export default function ProjectAssigned({ employee }) {
             <div>
                 <h3>Assigned Employees :</h3>
                 {
-                    fetching2 ? <ProgressBar/> : employees && employees.length >0 ? employees.map((employee)=>{
+                    fetching2 ? <ProgressBar/> : employees && employees.length >0 ? employees.map((employee,index)=>{
                         return(
-                           <div className={styles.user}>
+                           <div className={styles.user} key={index}>
                             <p>{employee.employee_id}</p>
                             <p>{employee.employee_name}</p>
                             <p>{employee.employee_phone}</p>

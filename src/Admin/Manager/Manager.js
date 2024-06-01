@@ -11,17 +11,21 @@ import { useNavigate} from "react-router-dom";
 const Manager = () => {
   const [manager_data, setData] = useState([])
   const [form, setForm] = useState(false)
+  const [fetch,setFetch]=useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
     FetchAllManagers().then(async (response) => {
+      setFetch(true)
       if (!response.ok) {
         alert("Unauthorized Access/ Session Expired")
         sessionStorage.clear()
+        setFetch(false)
         navigate("/")
       } else {
         response.json().then((temp) => {
           setData(temp.result);
+          setFetch(false)
         });
       }
     })
@@ -40,7 +44,7 @@ const Manager = () => {
           <div className={styles.circle}><Delete DeleteFunction={DeleteManager} isNecessary={true} /></div>
         </div>
       </div>
-      {manager_data && manager_data.length > 0 ? <List data={manager_data} /> : <ProgressBar />}
+      {!fetch ? <List data={manager_data} /> : <ProgressBar />}
     </div>
   )
 }

@@ -4,6 +4,10 @@
     position: fixed;
     justify-content: center;
     align-items: center;
+    // transform: translate(50%,50%);
+    background-color: #cccccc42;
+    height: 85vh;
+    width: 100vw;
 }
 .box .content {
     position: relative;
@@ -47,7 +51,7 @@
     height: 100%;
     fill: transparent;
     stroke-width: 2;
-    stroke: rgba(0,0,0,0.05);
+    stroke: #808080;
     transform: translate(5px, 5px);
   }
   .box .content .percent .dot {

@@ -11,16 +11,20 @@ import { useNavigate} from "react-router-dom";
 const Employees = () => {
   const [employee_data, setData] = useState([])
   const [form, setForm] = useState(false)
+  const [fetch,setFetch]=useState(false)
   const navigate = useNavigate()
   useEffect(() => {
+    setFetch(true);
     FetchAllEmployees().then(async (response) => {
       if (!response.ok) {
         alert("Unauthorized Access/ Session Expired")
         sessionStorage.clear()
+        setFetch(false);
         navigate("/")
       } else {
         response.json().then((temp) => {
           setData(temp.result);
+          setFetch(false);
         });
       }
     })
@@ -37,7 +41,7 @@ const Employees = () => {
           <div className={styles.circle}><Delete DeleteFunction={DeleteEmployee} isNecessary={true} /></div>
         </div>
       </div>
-      {employee_data && employee_data.length > 0 ? <List data={employee_data} /> : <ProgressBar />}
+      {!fetch ? <List data={employee_data} /> : <ProgressBar />}
     </div>
   )
 }

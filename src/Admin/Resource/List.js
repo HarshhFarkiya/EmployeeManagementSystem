@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import styles from "../../Components/List/List.module.scss";
 import close from "../../assets/close.svg"
 import approve from "../../assets/approve.svg"
-import { ApproveResourceRequest,RejectResourceRequest } from "../../apis/Resources";
+import { ApproveResourceRequest, RejectResourceRequest } from "../../apis/Resources";
 import ProgressBar from "../../Components/progressbar/ProgressBar";
 const List = ({ data }) => {
     const [openRow, setOpenRow] = useState(null);
-    const [submit,setSubmit]=useState(false)
+    const [submit, setSubmit] = useState(false)
     const toggleOperations = (index) => {
         setOpenRow(openRow === index ? null : index);
     };
@@ -48,7 +48,7 @@ const List = ({ data }) => {
     }
     return (
         <>
-        {submit &&<ProgressBar/>}
+            {submit && <ProgressBar />}
             {data && (
                 <div className={styles.details}>
                     <div className={styles.list}>
@@ -83,7 +83,7 @@ const List = ({ data }) => {
                                     <span className={styles.status}>
                                         {
                                             item.status == 0 ? (<><div onClick={() => { approve_request(item) }}><img src={approve} alt="Approve" /></div>
-                                                <div onClick={()=>{reject_request(item)}}><img src={close} alt="Reject" /></div></>) : <div>Not Allowed</div>
+                                                <div onClick={() => { reject_request(item) }}><img src={close} alt="Reject" /></div></>) : <div>Not Allowed</div>
                                         }
                                     </span>
 

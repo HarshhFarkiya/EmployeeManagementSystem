@@ -31,7 +31,6 @@ export default function ProjectEmployees({title,project_id,setShow,unassign_user
             <div className={styles.user}>
             {
                 data && data.map((item,index)=>{
-                    console.log(item)
                     return(
                         <div className={styles.list}>
                         <p key={index}>{item[id]}</p>

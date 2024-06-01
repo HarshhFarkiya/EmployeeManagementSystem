@@ -53,7 +53,7 @@ export default function ResourceRequest({ closeSearch, project_id }) {
                 });
             }
         });
-    }, [navigate]);
+    }, []);
 
     return (
         <div className={styles.resourceRequest}>
