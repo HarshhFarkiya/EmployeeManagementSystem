@@ -1,15 +1,112 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../Components/List/List.module.scss";
 const List = ({ data }) => {
   const [openRow, setOpenRow] = useState(null);
+  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedOption, setSelectedOption] = useState('');
 
+  // Step 2: Handle the change event
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
+    const val = event.target.value;
+    const results = [];
+    if (data) {
+      for (const item of data) {
+        if(val==="assigned" && item.project_assigned.length > 0){
+          results.push(item)
+        }
+        else if(val==="unassigned" && item.project_assigned.length ===0){
+          results.push(item)
+        }
+        else if(val==="all" || !val){
+          results.push(item)
+        }
+      }
+    }
+    setSearchResults(results);
+  };
   const toggleOperations = (index) => {
     setOpenRow(openRow === index ? null : index);
   };
+  const handleInputChange = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+    handleSearch(query);
+  };
+  const handleSearch = (query) => {
+    const results = [];
+    if (data) {
+      for (const item of data) {
+        if (
+          item.employee_skills.toLowerCase().includes(query)
+        ) {
+          if(selectedOption=='' || selectedOption==='all')
+          {
+            results.push(item);
+          }
+          else if(item.project_assigned.length===0 && selectedOption==="unassigned")
+          {
+            results.push(item);
+          }
+          else if(item.project_assigned.length!==0 && selectedOption==="assigned"){
+            results.push(item);
 
+          }
+        }
+      }
+    }
+    setSearchResults(results);
+  };
   return (
     <>
-      {data && (
+     <div className={styles.searchbarContainer}>
+        <form className={styles.searchForm}>
+          <input
+            type="text"
+            className={styles.searchInput}
+            placeholder="Search by skill"
+            value={searchQuery}
+            onChange={handleInputChange}
+          />
+          
+        </form>
+      <div className={styles.radio}>
+        <label>
+          <input
+            type="radio"
+            value="all"
+            checked={selectedOption === 'all'}
+            onChange={handleChange}
+          />
+          All
+        </label>
+      </div>
+      <div className={styles.radio}>
+        <label>
+          <input
+            type="radio"
+            value="assigned"
+            checked={selectedOption === 'assigned'}
+            onChange={handleChange}
+          />
+          Assigned
+        </label>
+      </div>
+      <div className={styles.radio}>
+        <label>
+          <input
+            type="radio"
+            value="unassigned"
+            checked={selectedOption === 'unassigned'}
+            onChange={handleChange}
+          />
+          Unassigned
+        </label>
+      </div>
+      </div>
+      {searchResults && (
         <div className={styles.details}>
           <div className={styles.list}>
             <div className={styles.head}>
@@ -22,7 +119,7 @@ const List = ({ data }) => {
               <span className={styles.status}>Project Assigned</span>
             </div>
             <div className={styles.table}>
-              {data.map((item, index) => (
+              {searchResults.map((item, index) => (
                 
                 <div
                   className={styles.row}

@@ -26,8 +26,13 @@ const Profile = ({ employee, setEmployee, newSkills, setNewSkills }) => {
 
   const updateSkills = () => {
     setEmployee({ ...employee, employee_skills: newSkills });
-    AddSkills(newSkills).then((response) => {
-      console.log(response);
+    AddSkills(newSkills).then(async(response) => {
+      if(!response){
+        alert("Some Error Occured");
+        return;
+      }
+        const res = await response.json();
+        alert(res.message);
     })
   };
 

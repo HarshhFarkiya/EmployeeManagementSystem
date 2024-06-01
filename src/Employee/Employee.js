@@ -13,25 +13,18 @@ import ProjectAssigned from './ProjectAssigned/ProjectAssigned'
 import project from "../assets/course.svg"
 export default function Employee() {
   const [employee, setEmployee] = useState(null);
-  const [newSkills, setNewSkills] = useState(null);
+  const [newSkills, setNewSkills] = useState('');
   const token = getSessionVariable("token");
   const [section,changeSection]=useState("profile")
   const sidebar_data = [{"title":"Profile", "link":"profile","icon":profile},{"title":"Project Assigned", "link":"project","icon":project},{"title":"Employees", "link":"employees","icon":manager},{"title":"Managers", "link":"managers","icon":manager}]
   const sidebar_element_change={"employees":<Employees/>,"managers":<Manager/>,"profile":<Profile employee={employee} setEmployee={setEmployee} newSkills={newSkills} setNewSkills={setNewSkills}/>,"project":<ProjectAssigned employee={employee}/>}
-  
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (token) {
-      navigate("/employee");
-    }
-    else{
+    if (!token) {
       alert("Session expired")
-      navigate("/")
+      navigate("/");
     }
-  }, [])
-
-  useEffect(() => {
     FetchEmployee().then(async (response) => {
       if (response.status !== 200) {
         let alert_data = response.status;

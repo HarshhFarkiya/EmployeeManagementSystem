@@ -11,7 +11,6 @@ export default function Resource() {
             }
             else{
                 const temp = await response.json();
-                console.log(temp)
                 setData(temp.result);
             }
         })

@@ -61,7 +61,8 @@ export default function Login() {
         setWait(false)
     }
     return (
-      <div>
+        <div className={styles.head}>
+          {wait&& <ProgressBar/>}
         
           <div className={styles.login}>
             <h3>Login</h3>
@@ -71,12 +72,13 @@ export default function Login() {
                 <input placeholder='Password' name='password' type="password" onChange={handleChange} value={credentials.password} />
                 </div>
                 <div className={styles.button}>
-               { wait ? <ProgressBar/> :<button type='Submit' onClick={handleSubmit}>Login</button>}
+               {<button type='Submit' onClick={handleSubmit}>Login</button>}
                 </div>
             </form>
         </div>
         
       </div>
+       
 
     )
 }

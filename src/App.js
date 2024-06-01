@@ -21,7 +21,7 @@ const App = () => {
           path="/"
           element={
             <div className={styles.login}>
-              <div className={styles.head}>  Employee Management System</div>
+              <div className={styles.head}>Employee Management System</div>
               <Login />
             </div>
           }

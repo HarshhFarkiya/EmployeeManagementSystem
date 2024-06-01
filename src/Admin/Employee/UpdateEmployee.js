@@ -35,6 +35,11 @@ const UpdateEmployeeInfo = ({ setForm, user, EditFunction }) => {
             // Form is valid, you can submit the data or perform other actions
             setSubmitting(true);
             EditFunction(formData).then(async (response) => {
+                if(!response){
+                    setSubmitting(false);
+                    alert("Internal Server Error")
+                    return
+                }
                 if (response.status != 200) {
                     let alert_data = response.status;
                     const data = await response.json();

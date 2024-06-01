@@ -30,7 +30,7 @@ export default function ProjectAssigned({ employee }) {
             setFetching(false)
         })
 
-    }, [fetch])
+    }, [])
     useEffect(() => {
         setFetching2(true);
         project_details && FetchAllProjectEmployees(project_details.project_id).then(async (response) => {
@@ -43,7 +43,6 @@ export default function ProjectAssigned({ employee }) {
             }
             else {
                 const data = await response.json();
-                console.log(data)
                 setManagers(data.result.managers);
                 setEmployees(data.result.employees);
             }
@@ -90,9 +89,9 @@ export default function ProjectAssigned({ employee }) {
                                     <p>Phone</p>
                                     <p>Email</p>
                                 </div>
-                                {managers.map((manager) => {
+                                {managers.map((manager,index) => {
                                     return (
-                                        <div className={styles.user}>
+                                        <div className={styles.user} key={index}>
                                             <p>{manager.manager_id}</p>
                                             <p>{manager.manager_name}</p>
                                             <p>{manager.manager_phone}</p>
@@ -118,9 +117,9 @@ export default function ProjectAssigned({ employee }) {
                                     <p>Email</p>
                                     <p>Skills</p>
                                 </div>
-                                {employees.map((employee) => {
+                                {employees.map((employee,index) => {
                                     return (
-                                        <div className={styles.user}>
+                                        <div className={styles.user} key={index}>
                                             <p>{employee.employee_id}</p>
                                             <p>{employee.employee_name}</p>
                                             <p>{employee.employee_phone}</p>

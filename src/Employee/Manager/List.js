@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "../../Components/List/List.module.scss";
-import Operations from "../../Admin/Manager/Operations";
 
 const List = ({ data }) => {
   const [openRow, setOpenRow] = useState(null);
@@ -41,7 +40,7 @@ const List = ({ data }) => {
                     {item.manager_phone || "Not Available"}
                   </span>
                   <span className={styles.status}>
-                    {item.project_assigned?JSON.parse(item.project_assigned).map((item,key)=>{
+                    {item.project_assigned && JSON.parse(item.project_assigned).length >0 ?JSON.parse(item.project_assigned).map((item,key)=>{
                       return (
                         <div key={key}>{item}</div>
                       )
