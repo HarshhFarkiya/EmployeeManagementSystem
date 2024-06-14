@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./List.module.scss";
 import Operations from "../../Admin/Employee/Operations";
 
-const List = ({ data }) => {
+const List = ({ data,setRefetch,refetch}) => {
   const [openRow, setOpenRow] = useState(null);
 
   const toggleOperations = (index) => {
@@ -25,7 +25,7 @@ const List = ({ data }) => {
             </div>
             <div className={styles.table}>
               {data.map((item, index) => (
-                openRow === index ? <Operations setOperation={setOpenRow} id={item.employee_id} assigned={item.project_assigned} user={item}/> :
+                openRow === index ? <Operations setOperation={setOpenRow} id={item.employee_id} assigned={item.project_assigned} user={item} setRefetch={setRefetch} refetch={refetch}/> :
                 <div
                   className={styles.row}
                   key={index}

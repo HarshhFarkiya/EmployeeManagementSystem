@@ -4,7 +4,7 @@ import styles from './Manager.module.scss'; // Assuming you have a SCSS module f
 import { AddManager } from '../../apis/Manager';
 import ProgressBar from '../../Components/progressbar/ProgressBar';
 import close from "../../assets/close.svg"
-const AddManagerForm = ({setForm}) => {
+const AddManagerForm = ({setForm,setRefetch,refetch}) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -45,6 +45,8 @@ const AddManagerForm = ({setForm}) => {
         else{
             const data = await response.json();
             alert(data.message + " , Please note the password of user : "+data.password)
+            setForm(false)
+            setRefetch(!refetch)
         }
         setSubmitting(false);
       })

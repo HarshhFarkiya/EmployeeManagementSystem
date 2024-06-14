@@ -2,7 +2,7 @@ import React from 'react'
 import styles from "./Operations.module.scss"
 import deleteIcon from "../../assets/delete.svg"
 
-export default function Delete({ id, DeleteFunction, isNecessary }) {
+export default function Delete({ id, DeleteFunction, isNecessary,setRefetch,refetch}) {
     const delete_item = () => {
 
         if (isNecessary) {
@@ -20,6 +20,7 @@ export default function Delete({ id, DeleteFunction, isNecessary }) {
             else {
                 const data = await response.json();
                 alert(data.message)
+                setRefetch(!refetch)
             }
         })
     }

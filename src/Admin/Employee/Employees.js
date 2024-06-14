@@ -13,6 +13,7 @@ const Employees = () => {
   const [form, setForm] = useState(false)
   const [fetch,setFetch]=useState(false)
   const navigate = useNavigate()
+  const [refetch,setRefetch]=useState(false);
   useEffect(() => {
     setFetch(true);
     FetchAllEmployees().then(async (response) => {
@@ -28,20 +29,20 @@ const Employees = () => {
         });
       }
     })
-  }, [])
+  }, [refetch])
 
   return (
     <div className={styles.employees}>
       <p>Employees Section</p>
       <div className={styles.functions}>
         <div className={styles.add}>
-          <div onClick={() => { setForm(true) }} className={styles.circle}><img src={add} /></div>{form && <AddEmployeeForm setForm={setForm} />}
+          <div onClick={() => { setForm(true) }} className={styles.circle}><img src={add} /></div>{form && <AddEmployeeForm setForm={setForm} setRefetch={setRefetch} refetch={refetch}/>}
         </div>
         <div className={styles.delete}>
-          <div className={styles.circle}><Delete DeleteFunction={DeleteEmployee} isNecessary={true} /></div>
+          <div className={styles.circle}><Delete DeleteFunction={DeleteEmployee} isNecessary={true} setRefetch={setRefetch} refetch={refetch}/></div>
         </div>
       </div>
-      {!fetch ? <List data={employee_data} /> : <ProgressBar />}
+      {!fetch ? <List data={employee_data} setRefetch={setRefetch} refetch={refetch}/> : <ProgressBar />}
     </div>
   )
 }

@@ -7,7 +7,7 @@ import Edit from '../../Components/Operations/Edit';
 import { DeleteEmployee, UnassignEmployee,AssignEmployee ,EditEmployee} from '../../apis/Employee';
 import styles from "./Employees.module.scss"
 
-export default function Operations({id,assigned,setOperation,user}) {
+export default function Operations({id,assigned,setOperation,user,setRefetch,refetch}) {
   function unassign_item(assigned,UnassignFunction,id){
     if (!assigned) {
         alert("Employee is not assigned to any project")
@@ -24,16 +24,17 @@ export default function Operations({id,assigned,setOperation,user}) {
         else {
             const data = await response.json();
             console.log(data)
+            setRefetch(!refetch)
             alert(data.message)
         }
     })
 }
   return (
     <div className={styles.operations}>
-        <Delete id={id} DeleteFunction={DeleteEmployee}/>
-        <Unassign id={id} assigned={assigned} UnassignFunction={UnassignEmployee} unassign_item={unassign_item}/>
-        <Assign AssignFunction={AssignEmployee} id={id}/>
-        <Edit EditFunction={EditEmployee} user={user}/>
+        <Delete id={id} DeleteFunction={DeleteEmployee} setRefetch={setRefetch} refetch={refetch}/>
+        <Unassign id={id} assigned={assigned} UnassignFunction={UnassignEmployee} unassign_item={unassign_item} setRefetch={setRefetch} refetch={refetch}/>
+        <Assign AssignFunction={AssignEmployee} id={id} setRefetch={setRefetch} refetch={refetch}/>
+        <Edit EditFunction={EditEmployee} user={user} setRefetch={setRefetch} refetch={refetch}/>
         <Close setOperation={setOperation}/>
     </div>
   )

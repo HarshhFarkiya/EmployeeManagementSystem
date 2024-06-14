@@ -13,6 +13,7 @@ const Manager = () => {
   const [form, setForm] = useState(false)
   const [fetch,setFetch]=useState(false)
   const navigate = useNavigate()
+  const [refetch,setRefetch]=useState(false);
 
   useEffect(() => {
     FetchAllManagers().then(async (response) => {
@@ -29,7 +30,7 @@ const Manager = () => {
         });
       }
     })
-  }, [])
+  }, [refetch])
 
   return (
     <div className={styles.managers}>
@@ -38,7 +39,7 @@ const Manager = () => {
      </div>
       <div className={styles.functions}>
         <div className={styles.add}>
-          <div onClick={() => { setForm(true) }} className={styles.circle}><img src={add} /></div>{form && <AddManagerForm setForm={setForm} />}
+          <div onClick={() => { setForm(true) }} className={styles.circle}><img src={add} /></div>{form && <AddManagerForm setForm={setForm} setRefetch={setRefetch} refetch={refetch}/>}
         </div>
         <div className={styles.delete}>
           <div className={styles.circle}><Delete DeleteFunction={DeleteManager} isNecessary={true} /></div>
