@@ -13,8 +13,10 @@ import { useNavigate} from "react-router-dom";
 import { getSessionVariable } from "../Components/Session";
 import { useEffect } from 'react';
  const Admin=()=> {
+  
+  const [refetch,setRefetch]=useState(false);
     const sidebar_data = [{"title":"Employees", "link":"employees","icon":manager},{"title":"Managers", "link":"managers","icon":manager},{"title":"Projects", "link":"projects","icon":project},{"title":"Requests", "link":"requests","icon":request}]
-    const sidebar_element_change={"employees":<Employees/>,"managers":<Manager/>,"projects":<Project/>,"requests":<Resource/>}
+    const sidebar_element_change={"employees":<Employees refetch={refetch} setRefetch={setRefetch}/>,"managers":<Manager refetch={refetch} setRefetch={setRefetch}/>,"projects":<Project refetch={refetch} setRefetch={setRefetch}/>,"requests":<Resource refetch={refetch} setRefetch={setRefetch}/>}
     const token = getSessionVariable("token");
     const role = getSessionVariable("role");
     const navigate = useNavigate();

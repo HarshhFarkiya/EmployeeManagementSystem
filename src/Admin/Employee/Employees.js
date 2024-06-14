@@ -8,12 +8,11 @@ import add from "../../assets/add.svg"
 import Delete from '../../Components/Operations/Delete'
 import { useNavigate} from "react-router-dom";
 
-const Employees = () => {
+const Employees = ({refetch, setRefetch}) => {
   const [employee_data, setData] = useState([])
   const [form, setForm] = useState(false)
-  const [fetch,setFetch]=useState(false)
   const navigate = useNavigate()
-  const [refetch,setRefetch]=useState(false);
+  const [fetch,setFetch]=useState(false)
   useEffect(() => {
     setFetch(true);
     FetchAllEmployees().then(async (response) => {

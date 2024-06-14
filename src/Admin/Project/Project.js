@@ -6,7 +6,7 @@ import styles from "./Project.module.scss"
 import add from "../../assets/add.svg"
 import Delete from '../../Components/Operations/Delete'
 import AddProjectForm from './AddProjectForm'
-export default function Project() {
+export default function Project({refetch, setRefetch}) {
   const [data,setData]=useState([])
   const [form,setForm]=useState(false)
   const navigate=useNavigate()
@@ -22,7 +22,7 @@ export default function Project() {
         });
       }
     })
-  }, [])
+  }, [refetch])
   return (
     <div className={styles.projects}>
       <div className={styles.head}>Project Section</div>
@@ -31,7 +31,7 @@ export default function Project() {
           <div onClick={() => { setForm(true) }} className={styles.circle}><img src={add} /></div>{form && <AddProjectForm setForm={setForm} />}
         </div>
         <div className={styles.delete}>
-          <div className={styles.circle}><Delete DeleteFunction={DeleteProject} isNecessary={true} /></div>
+          <div className={styles.circle}><Delete DeleteFunction={DeleteProject} isNecessary={true} setRefetch={setRefetch} refetch={refetch}/></div>
         </div>
         </div>
       <List data={data}/>

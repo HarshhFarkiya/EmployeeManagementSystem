@@ -4,8 +4,9 @@ import close from "../../assets/close.svg"
 import approve from "../../assets/approve.svg"
 import { ApproveResourceRequest, RejectResourceRequest } from "../../apis/Resources";
 import ProgressBar from "../../Components/progressbar/ProgressBar";
-const List = ({ data }) => {
+const List = ({ data ,refetch,setRefetch}) => {
     const [openRow, setOpenRow] = useState(null);
+    
     const [submit, setSubmit] = useState(false)
     const toggleOperations = (index) => {
         setOpenRow(openRow === index ? null : index);
@@ -20,6 +21,7 @@ const List = ({ data }) => {
                 alert_data += data.message;
                 setSubmit(false)
                 alert(alert_data)
+                setRefetch(!refetch)
             }
             else {
                 const data = await response.json();
@@ -38,6 +40,7 @@ const List = ({ data }) => {
                 alert_data += data.message;
                 setSubmit(false)
                 alert(alert_data)
+                setRefetch(!refetch)
             }
             else {
                 const data = await response.json();

@@ -8,13 +8,11 @@ import Delete from '../../Components/Operations/Delete'
 import AddManagerForm from './AddManagerForm'
 import { useNavigate} from "react-router-dom";
 
-const Manager = () => {
+const Manager = ({refetch,setRefetch}) => {
   const [manager_data, setData] = useState([])
   const [form, setForm] = useState(false)
   const [fetch,setFetch]=useState(false)
   const navigate = useNavigate()
-  const [refetch,setRefetch]=useState(false);
-
   useEffect(() => {
     FetchAllManagers().then(async (response) => {
       setFetch(true)
@@ -42,7 +40,7 @@ const Manager = () => {
           <div onClick={() => { setForm(true) }} className={styles.circle}><img src={add} /></div>{form && <AddManagerForm setForm={setForm} setRefetch={setRefetch} refetch={refetch}/>}
         </div>
         <div className={styles.delete}>
-          <div className={styles.circle}><Delete DeleteFunction={DeleteManager} isNecessary={true} /></div>
+          <div className={styles.circle}><Delete DeleteFunction={DeleteManager} isNecessary={true} setRefetch={setRefetch} refetch={refetch}/></div>
         </div>
       </div>
       {!fetch ? <List data={manager_data} /> : <ProgressBar />}
