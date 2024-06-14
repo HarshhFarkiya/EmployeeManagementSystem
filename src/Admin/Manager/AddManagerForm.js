@@ -15,6 +15,25 @@ const AddManagerForm = ({setForm,setRefetch,refetch}) => {
   const [submitting,setSubmitting] =useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if(name === 'phone'){
+      if(!/^[0-9]+$/.test(value)){
+        setErrors({...errors,[name]:"Phone Number Should be Only Digits"})
+      }
+      else if(value.length !=10 && value.length !=0){
+        setErrors({...errors,[name]:"Phone Number Should be of 10 digits"})
+      }
+      else {
+        setErrors({...errors,[name]:""})
+      }
+    }
+    else if(name === 'email'){
+      if(!value.endsWith('@nucleusteq.com')){
+        setErrors({...errors,[name]:"Email Must ends with @nucleusteq.com"})
+      }
+      else{
+        setErrors({...errors,[name]:""})
+      }
+    }
     setFormData({
       ...formData,
       [name]: value
@@ -32,6 +51,10 @@ const AddManagerForm = ({setForm,setRefetch,refetch}) => {
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       // Form is valid, you can submit the data or perform other actions
+      if(!/^[0-9]+$/.test(formData.phone)){
+        setErrors({...errors,"phone":"Phone Number Should be Only Digits"})
+        return;
+      }
       setSubmitting(true);
       AddManager(formData).then(async(response)=>{
         if(response.status!=200){
