@@ -14,10 +14,11 @@ const List = ({ data }) => {
     const results = [];
     if (data) {
       for (const item of data) {
-        if(val==="assigned" && item.project_assigned.length > 0){
+        console.log(item)
+        if(val==="assigned" && item.project_assigned && item.project_assigned.length > 0){
           results.push(item)
         }
-        else if(val==="unassigned" && item.project_assigned.length ===0){
+        else if(val==="unassigned" && (!item.project_assigned || item.project_assigned.length ===0)){
           results.push(item)
         }
         else if(val==="all" || !val){

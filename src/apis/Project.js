@@ -1,7 +1,7 @@
 import { getSessionVariable } from "../Components/Session";
 export const AddProject = async (project) => {
   const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
-  const apiUrl = `${SERVER_BASE_URL}/addProject`;
+  const apiUrl = `${SERVER_BASE_URL}/project`;
   const token = getSessionVariable("token");
   const id = getSessionVariable("id");
   project.admin_id = id;
@@ -26,7 +26,7 @@ export const FetchAllProjects = async () => {
     const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
     const token = getSessionVariable("token");
     const id = getSessionVariable("id");
-    const apiUrl = `${SERVER_BASE_URL}/getProjects?token=${token}&id=${id}`;
+    const apiUrl = `${SERVER_BASE_URL}/projects?token=${token}&id=${id}`;
   
     return fetch(apiUrl, {
       method: 'GET',
@@ -46,7 +46,7 @@ export const FetchAllProjects = async () => {
     const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
     const token = getSessionVariable("token");
     const id = getSessionVariable("id");
-    const apiUrl = `${SERVER_BASE_URL}/getProjectEmployees?token=${token}&project_id=${project_id}&id=${id}`;
+    const apiUrl = `${SERVER_BASE_URL}/project/employees?token=${token}&project_id=${project_id}&id=${id}`;
   
     return fetch(apiUrl, {
       method: 'GET',
@@ -66,7 +66,7 @@ export const FetchAllProjects = async () => {
 
   export const DeleteProject = async (project_id) => {
     const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
-    const apiUrl = `${SERVER_BASE_URL}/removeProject?project_id=${project_id}`;
+    const apiUrl = `${SERVER_BASE_URL}/project?project_id=${project_id}`;
     const token = getSessionVariable("token");
     const id = getSessionVariable("id");
   
@@ -90,7 +90,7 @@ export const FetchAllProjects = async () => {
     const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
     const token = getSessionVariable("token");
     const id = getSessionVariable("id");
-    const apiUrl = `${SERVER_BASE_URL}/getProject?token=${token}&id=${id}&project_id=${project_id}`;
+    const apiUrl = `${SERVER_BASE_URL}/project?token=${token}&id=${id}&project_id=${project_id}`;
   
     return fetch(apiUrl, {
       method: 'GET',

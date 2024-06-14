@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styles from "./List.module.scss";
 import Operations from "../../Admin/Employee/Operations";
-
+import Delete from "../Operations/Delete";
+import {DeleteEmployee} from "../../apis/Employee"
 const List = ({ data,setRefetch,refetch}) => {
   const [openRow, setOpenRow] = useState(null);
 
@@ -51,6 +52,7 @@ const List = ({ data,setRefetch,refetch}) => {
                   </span>
                   <span className={styles.status}>
                     {item.project_assigned || "Not Assigned"}
+                    {!item.project_assigned && <Delete DeleteFunction={DeleteEmployee} setRefetch={setRefetch} refetch={refetch} id={item.employee_id}/>}
                   </span>
                   
                 </div>

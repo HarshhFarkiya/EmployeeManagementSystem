@@ -1,7 +1,7 @@
 import { getSessionVariable } from "../Components/Session";
 export const AddEmployee = async (employee) => {
   const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
-  const apiUrl = `${SERVER_BASE_URL}/addEmployee`;
+  const apiUrl = `${SERVER_BASE_URL}/employee`;
   const token = getSessionVariable("token");
   const id = getSessionVariable("id");
   employee.admin_id = id;
@@ -25,7 +25,7 @@ export const AddEmployee = async (employee) => {
 
 export const DeleteEmployee = async (employee_id) => {
   const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
-  const apiUrl = `${SERVER_BASE_URL}/removeEmployee?employee_id=${employee_id}`;
+  const apiUrl = `${SERVER_BASE_URL}/employee?employee_id=${employee_id}`;
   const token = getSessionVariable("token");
   const id = getSessionVariable("id");
 
@@ -50,7 +50,7 @@ export const FetchAllEmployees = async () => {
   const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
   const token = getSessionVariable("token");
   const id = getSessionVariable("id");
-  const apiUrl = `${SERVER_BASE_URL}/getEmployees?token=${token}&id=${id}`;
+  const apiUrl = `${SERVER_BASE_URL}/employees?token=${token}&id=${id}`;
 
   return fetch(apiUrl, {
     method: 'GET',
@@ -68,7 +68,7 @@ export const FetchAllEmployees = async () => {
 
 export const UnassignEmployee = async (employee_id) => {
   const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
-  const apiUrl = `${SERVER_BASE_URL}/unassignEmployee`;
+  const apiUrl = `${SERVER_BASE_URL}/employee/unassign`;
   const token = getSessionVariable("token");
   const id = getSessionVariable("id");
 
@@ -90,7 +90,7 @@ export const UnassignEmployee = async (employee_id) => {
 
 export const AssignEmployee = async (employee_id, project_id) => {
   const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
-  const apiUrl = `${SERVER_BASE_URL}/assignEmployee`;
+  const apiUrl = `${SERVER_BASE_URL}/employee/assign`;
   const token = getSessionVariable("token");
   const id = getSessionVariable("id");
 
@@ -112,7 +112,7 @@ export const AssignEmployee = async (employee_id, project_id) => {
 
 export const EditEmployee = async (employee) => {
   const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
-  const apiUrl = `${SERVER_BASE_URL}/updateEmployee`;
+  const apiUrl = `${SERVER_BASE_URL}/employee`;
   const token = getSessionVariable("token");
   const id = getSessionVariable("id");
   employee.token=token;
@@ -135,7 +135,7 @@ export const EditEmployee = async (employee) => {
 
 export const AddSkills = async (skills) => {
   const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
-  const apiUrl = `${SERVER_BASE_URL}/addSkills`;
+  const apiUrl = `${SERVER_BASE_URL}/employee/addskills`;
   const token = getSessionVariable("token");
   const id = getSessionVariable("id");
   return fetch(apiUrl, {
@@ -158,7 +158,7 @@ export const FetchEmployee = async () => {
   const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
   const token = getSessionVariable("token");
   const id = getSessionVariable("id");
-  const apiUrl = `${SERVER_BASE_URL}/getEmployee?token=${token}&id=${id}&employee_id=${id}`;
+  const apiUrl = `${SERVER_BASE_URL}/employee?token=${token}&id=${id}&employee_id=${id}`;
 
   return fetch(apiUrl, {
     method: 'GET',

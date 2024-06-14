@@ -3,7 +3,7 @@ export const FetchAllResources = async () => {
     const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
     const token = getSessionVariable("token");
     const id = getSessionVariable("id");
-    const apiUrl = `${SERVER_BASE_URL}/getResourceRequests?token=${token}&id=${id}`;
+    const apiUrl = `${SERVER_BASE_URL}/requests?token=${token}&id=${id}`;
   
     return fetch(apiUrl, {
       method: 'GET',
@@ -25,7 +25,7 @@ export const FetchAllResources = async () => {
     const id = getSessionVariable("id");
     request.admin_id=id;
     request.token=token;
-    const apiUrl = `${SERVER_BASE_URL}/approveRequest`;
+    const apiUrl = `${SERVER_BASE_URL}/request/approve`;
   
     return fetch(apiUrl, {
       method: 'PUT',
@@ -48,7 +48,7 @@ export const FetchAllResources = async () => {
     const id = getSessionVariable("id");
     request.admin_id=id;
     request.token=token;
-    const apiUrl = `${SERVER_BASE_URL}/rejectRequest`;
+    const apiUrl = `${SERVER_BASE_URL}/request/reject`;
   
     return fetch(apiUrl, {
       method: 'PUT',
@@ -70,7 +70,7 @@ export const FetchAllResources = async () => {
     const token = getSessionVariable("token");
     const id = getSessionVariable("id");
 
-    const apiUrl = `${SERVER_BASE_URL}/requestResource`;
+    const apiUrl = `${SERVER_BASE_URL}/request`;
   
     return fetch(apiUrl, {
       method: 'POST',

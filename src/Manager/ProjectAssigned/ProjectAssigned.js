@@ -30,7 +30,7 @@ export default function ProjectAssigned({ employee }) {
             setFetching(false)
         })
 
-    }, [])
+    }, [fetch])
     useEffect(() => {
         setFetching2(true);
         project_details && FetchAllProjectEmployees(project_details.project_id).then(async (response) => {
